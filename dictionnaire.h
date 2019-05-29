@@ -8,6 +8,7 @@
 
 
 void ChargerDico(Maj_t Maj[], const char * nom_fichier);
-
+void SaisirChoix(int * pt_choix);
+void Traduction();
 
 #endif

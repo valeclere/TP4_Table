@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define HASH_MAX 29
+#define TAILLE_TEXTE 200
 
 typedef struct Maillon_s{
 	char * mot;
