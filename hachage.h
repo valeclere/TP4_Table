@@ -15,6 +15,6 @@ typedef struct Maillon_s{
 } Maillon_t, * Liste_t;
 
 unsigned int hash_string(const char *str);
-void Insertion(const char *str,const char * traduction, Liste_t Maj[]);
+void Insertion(char *mot, char * traduction, Liste_t Maj[]);
 void InitTab(Liste_t * tab, int taille);
 #endif
