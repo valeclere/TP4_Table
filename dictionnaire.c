@@ -28,20 +28,7 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 	}
 }
 
-bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
-	unsigned int indice = hash_string(mot);
-	bool trouve=false;  /*boolean qui permet d'indiquer si oui ou non on a trouvé le mot*/
-	Liste_t tmp = maj[indice].sousTable;
-	while(tmp!=NULL && strcmp(tmp->mot,mot)!=0 ){
-		tmp=tmp->suiv;
-	}
-	if(tmp!=NULL){
-		trouve = true;
-		*pt = tmp;
-	}
-	else printf("Mot %s non trouvé :/\n",mot);
-	return trouve;
-}
+
 
 
 /*Version Val
@@ -82,6 +69,7 @@ void Traduction()
 	//char txt_trad[];
 	char tmp[TAILLE_MOT];
 	Maillon_t * pt_maillon=NULL;
+	char * cour_txt=NULL;
 	
 	SaisirChoix(&choixMenu);
 	
@@ -90,22 +78,22 @@ void Traduction()
 		switch (choixMenu)
 		{
 			case 1:
-				ChargerDico();
+				ChargerDico(maj, "Ang_Esp.txt");
 				break;
 			case 2:
-				
+				ChargerDico(maj, "Ang_Fra.txt");
 				break;
 			case 3:
-				
+				ChargerDico(maj, "Esp_Ang.txt");
 				break;
 			case 4:
-				
+				ChargerDico(maj, "Esp_Fra.txt");
 				break;
 			case 5:
-				
+				ChargerDico(maj, "Fra_Ang.txt");
 				break;
 			case 6:
-				
+				ChargerDico(maj, "Fra_Esp.txt");
 				break;
 			default:
 				printf("Erreur de saisie, saisir un nombre entre 1 et 6\n");
@@ -116,12 +104,25 @@ void Traduction()
 	printf("Saisir le texte à traduire :\n");
 	fgets(txt,TAILLE_TEXTE,stdin);
 	txt[strlen(txt)-1]='\0';
+	strcpy(tmp, strtok_r(txt, " ", &cour_txt));
+
 	
-	while (txt[0]!='\0')
+	while (cour_txt[0]!='\0')
 	{
-		Rechercher(strtok(txt, " "),&pt_maillon);
-		printf(" %s", pt_maillon->trad);
+		printf("[Traduction] TMP====%s====\n",tmp);
+		if (RechercheMot(maj, tmp,&pt_maillon))
+		{
+			printf(" %s", pt_maillon->trad);
+		}
+		else printf(" [mot_inconnu]");
+		strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
 	}
+	
+	if (RechercheMot(maj, tmp,&pt_maillon))
+		{
+			printf(" %s", pt_maillon->trad);
+		}
+	else printf(" [mot_inconnu]");
 	printf("\n");
 }
 
@@ -137,13 +138,12 @@ void SaisirChoix(int * pt_choix)
 {
 	printf("\nSaisir le type de traduction :\n");
 	
-	printf("1) Ang/Esp\n");
-	printf("2) Ang/Fra\n");
-	printf("3) Esp/Ang\n");
-	printf("4) Esp/Fra\n");
-	printf("5) Fra/Ang\n");
-	printf("6) Fra/Esp\n");
+	printf("1) Ang_Esp\n");
+	printf("2) Ang_Fra\n");
+	printf("3) Esp_Ang\n");
+	printf("4) Esp_Fra\n");
+	printf("5) Fra_Ang\n");
+	printf("6) Fra_Esp\n");
 	
 	scanf("%d%*c", pt_choix);
-	
 }
