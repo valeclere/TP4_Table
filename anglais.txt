@@ -1,0 +1,14 @@
+hello;bonjour
+bye;au revoir
+sorry;pardon
+titi;toto
+tutu;tutu
+he;ho
+he;ho
+hello;bonjour
+bye;au revoir
+sorry;pardon
+titi;toto
+tutu;tutu
+he;ho
+he;ho
