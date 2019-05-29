@@ -23,7 +23,7 @@ unsigned int hash_string(const char *str)
  * Entrée : mot (=clé), traduction, le tableau MAJ (table majeure) qui contient les sous tables
  ----------------------------------------------------------------------------------------------------*/
 
-void Insertion(char *mot, char * traduction, Liste_t Maj[])
+void Insertion(char *mot, char * traduction, Maj_t Maj[])
 {
 	unsigned int indice = hash_string(mot); /*on récupère l'indice correspondant à la position de la sous table dans MAJ*/
 	int taille_m = strlen(mot);
@@ -39,13 +39,14 @@ void Insertion(char *mot, char * traduction, Liste_t Maj[])
 		printf("problème d'allocation\n");
 		exit(1); /* on sort du code */
 	}
-	if (Maj[indice]!=NULL) /* si la sous table existait déjà on chaine avec le nouveau maillon */
+	if (Maj[indice].sousTable!=NULL) /* si la sous table existait déjà on chaine avec le nouveau maillon */
 	{ 
-		pt_nouv->suiv = Maj[indice];
+		pt_nouv->suiv = Maj[indice].sousTable;
 	}
-	Maj[indice] = pt_nouv; /* on insère le nouveau maillon en début de sous table */
+	Maj[indice].sousTable = pt_nouv; /* on insère le nouveau maillon en début de sous table */
 	strcpy(pt_nouv->mot,mot);
 	strcpy(pt_nouv->trad, traduction);
+	Maj[indice].cmpt++; 		      /*incrémentation du compteur de la sous table*/
 }
 
 /*-----------------------------------------------------------------
@@ -53,12 +54,13 @@ void Insertion(char *mot, char * traduction, Liste_t Maj[])
  * Entrée : tab = La table majeure, taille = taille de MAJ
  ------------------------------------------------------------------*/
 
-void InitTab(Liste_t * tab, int taille)
+void InitTab(Maj_t * tab, int taille)
 {
 	int i=0;
 	for(i=0;i<taille;i++)
 	{
-		tab[i] = NULL;
+		tab[i].sousTable = NULL;
+		tab[i].cmpt = 0;
 	}
 }
 

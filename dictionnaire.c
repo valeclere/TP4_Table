@@ -1,6 +1,6 @@
 #include "dictionnaire.h"
 
-void ChargerDico(Liste_t Maj[], const char * nom_fichier){
+void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 	FILE * fichier = NULL;
 	char ligne[TAILLE_LIGNE];
 	char mot[TAILLE_MOT];
