@@ -46,6 +46,7 @@ void Insertion(char *mot, char * traduction, Maj_t Maj[])
 	Maj[indice].sousTable = pt_nouv; /* on insère le nouveau maillon en début de sous table */
 	strcpy(pt_nouv->mot,mot);
 	strcpy(pt_nouv->trad, traduction);
+	pt_nouv->suiv = NULL;
 	Maj[indice].cmpt++; 		      /*incrémentation du compteur de la sous table*/
 }
 

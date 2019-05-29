@@ -28,6 +28,21 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 	}
 }
 
+bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
+	unsigned int indice = hash_string(mot);
+	bool trouve=false;  /*boolean qui permet d'indiquer si oui ou non on a trouvé le mot*/
+	Liste_t tmp = maj[indice].sousTable;
+	while(tmp!=NULL && strcmp(tmp->mot,mot)!=0 ){
+		tmp=tmp->suiv;
+	}
+	if(tmp!=NULL){
+		trouve = true;
+		*pt = tmp;
+	}
+	else printf("Mot %s non trouvé :/\n",mot);
+	return trouve;
+}
+
 
 /*Version Val
 	else
