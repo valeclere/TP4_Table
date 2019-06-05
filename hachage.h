@@ -25,4 +25,7 @@ unsigned int hash_string(const char *str);
 void Insertion(char *mot, char * traduction, Maj_t Maj[]);
 void InitTab(Maj_t * tab, int taille);
 bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt);
+void LibMaj(Maj_t Maj[]);
+void LibSousTable(Liste_t SousTable);
+
 #endif

@@ -73,13 +73,60 @@ bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
 	unsigned int indice = hash_string(mot);
 	bool trouve=false;  /*boolean qui permet d'indiquer si oui ou non on a trouvé le mot*/
 	Liste_t tmp = maj[indice].sousTable;
+	
 	while(tmp!=NULL && strcmp(tmp->mot,mot)!=0 ){
 		tmp=tmp->suiv;
 	}
+	
 	if(tmp!=NULL){
 		trouve = true;
 		*pt = tmp;
 	}
-	else printf("Mot %s non trouvé :/\n",mot);
+	//else printf("Mot %s non trouvé :/\n",mot);
 	return trouve;
 }
+
+
+/*-------------
+ * Libérer Maj
+ *-------*/
+ 
+void LibMaj(Maj_t Maj[])
+{
+	int i=0;
+	for (i=0;i<29;i++)
+	{
+		if (Maj[i].sousTable!=NULL)
+		{
+			LibSousTable(Maj[i].sousTable);
+		}
+	} 
+	  
+}
+
+/*---------
+ * Liberer Sous Table
+ *------------*/
+ 
+void LibSousTable(Liste_t SousTable)
+{
+	Maillon_t * prec = SousTable;
+	Maillon_t * cour = SousTable->suiv;
+	
+	while(cour!=NULL)
+	{
+		free(prec);
+		prec=cour;
+		cour=cour->suiv;
+	}
+	free(prec);
+}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+

@@ -64,6 +64,7 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 void Traduction()
 {
 	Maj_t maj[29];
+	InitTab(maj,29);
 	int choixMenu = 0;
 	char txt[TAILLE_TEXTE];
 	//char txt_trad[];
@@ -71,10 +72,11 @@ void Traduction()
 	Maillon_t * pt_maillon=NULL;
 	char * cour_txt=NULL;
 	
-	SaisirChoix(&choixMenu);
+	printf("\nWelcome/Bienvenue/Bienvenida !\n");
 	
-	while (choixMenu<1 && choixMenu>6)
+	while (choixMenu!= 7)
 	{
+		SaisirChoix(&choixMenu);
 		switch (choixMenu)
 		{
 			case 1:
@@ -95,35 +97,43 @@ void Traduction()
 			case 6:
 				ChargerDico(maj, "Fra_Esp.txt");
 				break;
+			case 7:
+				printf("\nSee you/À bientôt/Hasta pronto !\n");
+				exit(0);
 			default:
 				printf("Erreur de saisie, saisir un nombre entre 1 et 6\n");
 				SaisirChoix(&choixMenu);
-		}	
-	}
+		}
 	
-	printf("Saisir le texte à traduire :\n");
-	fgets(txt,TAILLE_TEXTE,stdin);
-	txt[strlen(txt)-1]='\0';
-	strcpy(tmp, strtok_r(txt, " ", &cour_txt));
-
+		printf("\nSaisir le texte à traduire : ");
+		fgets(txt,TAILLE_TEXTE,stdin);
+		txt[strlen(txt)-1]='\0';
+		strcpy(tmp, strtok_r(txt, " ", &cour_txt));
 	
-	while (cour_txt[0]!='\0')
-	{
-		printf("[Traduction] TMP====%s====\n",tmp);
+		printf("Traduction : ");
+		
+		while (*cour_txt!='\0')
+		{
+			//printf("[Traduction] TMP====%s====\n",tmp);
+			if (RechercheMot(maj, tmp,&pt_maillon))
+			{
+				printf(" %s", pt_maillon->trad);
+			}
+			else printf(" [mot_inconnu]");
+			strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
+		}
+		//printf("[Traduction] TMP====%s====\n",tmp); //à supprimer
+		
 		if (RechercheMot(maj, tmp,&pt_maillon))
-		{
-			printf(" %s", pt_maillon->trad);
-		}
+			{
+				printf(" %s", pt_maillon->trad);
+			}
 		else printf(" [mot_inconnu]");
-		strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
+		printf("\n");
+		
+		LibMaj(maj);// libérer la mémoire maj
 	}
 	
-	if (RechercheMot(maj, tmp,&pt_maillon))
-		{
-			printf(" %s", pt_maillon->trad);
-		}
-	else printf(" [mot_inconnu]");
-	printf("\n");
 }
 
 
@@ -144,6 +154,7 @@ void SaisirChoix(int * pt_choix)
 	printf("4) Esp_Fra\n");
 	printf("5) Fra_Ang\n");
 	printf("6) Fra_Esp\n");
+	printf("7) Quitter\n");
 	
 	scanf("%d%*c", pt_choix);
 }

@@ -1,0 +1,7 @@
+hello;bonjour
+bye;au revoir
+sorry;pardon
+i;je
+am;suis
+a;un
+zz;zz
