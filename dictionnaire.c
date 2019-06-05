@@ -76,6 +76,7 @@ void Traduction()
 	
 	while (choixMenu!= 7)
 	{
+		choixMenu = 0; /* on réinitialise à chaque fois au cas où SaisirChoix ne marche pas */
 		SaisirChoix(&choixMenu);
 		switch (choixMenu)
 		{
@@ -101,37 +102,40 @@ void Traduction()
 				printf("\nSee you/À bientôt/Hasta pronto !\n");
 				exit(0);
 			default:
-				printf("Erreur de saisie, saisir un nombre entre 1 et 6\n");
+				printf("Erreur de saisie, saisir un nombre entre 1 et 7\n");
 				SaisirChoix(&choixMenu);
 		}
-	
-		printf("\nSaisir le texte à traduire : ");
-		fgets(txt,TAILLE_TEXTE,stdin);
-		txt[strlen(txt)-1]='\0';
-		strcpy(tmp, strtok_r(txt, " ", &cour_txt));
-	
-		printf("Traduction : ");
+		if (choixMenu != 0) /* Si la saisie du menu a fonctionné */
+		{	
+			printf("\nSaisir le texte à traduire : ");
+			fgets(txt,TAILLE_TEXTE,stdin);
+			txt[strlen(txt)-1]='\0';
+			strcpy(tmp, strtok_r(txt, " ", &cour_txt));
 		
-		while (*cour_txt!='\0')
-		{
-			//printf("[Traduction] TMP====%s====\n",tmp);
+			printf("Traduction : ");
+			
+			while (*cour_txt!='\0')
+			{
+				//printf("[Traduction] TMP====%s====\n",tmp);
+				if (RechercheMot(maj, tmp,&pt_maillon))
+				{
+					printf(" %s", pt_maillon->trad);
+				}
+				else printf(" [mot_inconnu]");
+				strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
+			}
+			//printf("[Traduction] TMP====%s====\n",tmp); //à supprimer
+			
 			if (RechercheMot(maj, tmp,&pt_maillon))
-			{
-				printf(" %s", pt_maillon->trad);
-			}
+				{
+					printf(" %s", pt_maillon->trad);
+				}
 			else printf(" [mot_inconnu]");
-			strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
+			printf("\n");
+			
+			LibMaj(maj);// libérer la mémoire maj
+			InitTab(maj,29);
 		}
-		//printf("[Traduction] TMP====%s====\n",tmp); //à supprimer
-		
-		if (RechercheMot(maj, tmp,&pt_maillon))
-			{
-				printf(" %s", pt_maillon->trad);
-			}
-		else printf(" [mot_inconnu]");
-		printf("\n");
-		
-		LibMaj(maj);// libérer la mémoire maj
 	}
 	
 }
@@ -157,4 +161,5 @@ void SaisirChoix(int * pt_choix)
 	printf("7) Quitter\n");
 	
 	scanf("%d%*c", pt_choix);
+	fflush(stdout);
 }
