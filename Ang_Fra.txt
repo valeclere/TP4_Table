@@ -1,7 +1,13 @@
-hello;bonjour
-bye;au revoir
-sorry;pardon
+line;ligne
 i;je
 am;suis
 a;un
 zz;zz
+why;pourquoi
+this;ce
+cat;chat
+sorry;désolé
+hello;bonjour
+zz;zz
+ok;ok
+computer;ordinateur
