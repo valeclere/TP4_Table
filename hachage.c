@@ -34,6 +34,10 @@ void Insertion(char *mot, char * traduction, Maj_t Maj[])
 	pt_nouv->mot = (char*)malloc((taille_m+1)*sizeof(char));
 	pt_nouv->trad = (char*)malloc((taille_t+1)*sizeof(char));
 	
+	strcpy(pt_nouv->mot,mot);
+	strcpy(pt_nouv->trad, traduction);
+	pt_nouv->suiv = NULL;
+	
 	if (pt_nouv==NULL || pt_nouv->mot==NULL || pt_nouv->trad==NULL) /* allocation a échouée */
 	{ 
 		printf("problème d'allocation\n");
@@ -44,9 +48,6 @@ void Insertion(char *mot, char * traduction, Maj_t Maj[])
 		pt_nouv->suiv = Maj[indice].sousTable;
 	}
 	Maj[indice].sousTable = pt_nouv; /* on insère le nouveau maillon en début de sous table */
-	strcpy(pt_nouv->mot,mot);
-	strcpy(pt_nouv->trad, traduction);
-	pt_nouv->suiv = NULL;
 	Maj[indice].cmpt++; 		      /*incrémentation du compteur de la sous table*/
 }
 
@@ -110,15 +111,22 @@ void LibMaj(Maj_t Maj[])
  
 void LibSousTable(Liste_t SousTable)
 {
+	
 	Maillon_t * prec = SousTable;
 	Maillon_t * cour = SousTable->suiv;
 	
 	while(cour!=NULL)
 	{
+		printf("mot %s, trad %s\n",prec->mot,prec->trad);
+		free(prec->mot);
+		free(prec->trad);
 		free(prec);
 		prec=cour;
 		cour=cour->suiv;
 	}
+	printf("mot %s, trad %s\n",prec->mot,prec->trad);
+	free(prec->mot);
+	free(prec->trad);
 	free(prec);
 }
 	 

@@ -7,6 +7,9 @@ int main(){
 	
 	//~ Maj_t maj[29]; /*déclaration de la table Majeure */
 	//~ InitTab(maj,29); /*initialisation : mettre NULL dans toutes les cases de MAJ*/
+	
+	//~ ChargerDico(maj, "Ang_Fra.txt");
+	
 	//~ char mot[10];
 	//~ Maillon_t * pt_maillon=NULL;
 	//~ strcpy(mot,"hello");

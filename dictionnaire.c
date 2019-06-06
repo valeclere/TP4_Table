@@ -78,6 +78,7 @@ void Traduction()
 	{
 		choixMenu = 0; /* on réinitialise à chaque fois au cas où SaisirChoix ne marche pas */
 		SaisirChoix(&choixMenu);
+		
 		switch (choixMenu)
 		{
 			case 1:
@@ -105,6 +106,7 @@ void Traduction()
 				printf("Erreur de saisie, saisir un nombre entre 1 et 7\n");
 				SaisirChoix(&choixMenu);
 		}
+		
 		if (choixMenu != 0) /* Si la saisie du menu a fonctionné */
 		{	
 			printf("\nSaisir le texte à traduire : ");
