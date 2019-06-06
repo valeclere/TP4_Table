@@ -4,6 +4,7 @@
 #include "hachage.h"
 #define TAILLE_LIGNE 100
 #define TAILLE_MOT 50
+#define TAILLE_TEXTE 500
 
 
 void ChargerDico(Maj_t Maj[], const char * nom_fichier);

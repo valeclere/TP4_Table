@@ -8,7 +8,7 @@
 #include <stdbool.h>
 
 #define HASH_MAX 29
-#define TAILLE_TEXTE 200
+
 
 typedef struct Maillon_s{
 	char * mot;
@@ -27,5 +27,6 @@ void InitTab(Maj_t * tab, int taille);
 bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt);
 void LibMaj(Maj_t Maj[]);
 void LibSousTable(Liste_t SousTable);
+void TailleMoy(Maj_t maj[]);
 
 #endif

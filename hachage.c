@@ -117,14 +117,12 @@ void LibSousTable(Liste_t SousTable)
 	
 	while(cour!=NULL)
 	{
-		printf("mot %s, trad %s\n",prec->mot,prec->trad);
 		free(prec->mot);
 		free(prec->trad);
 		free(prec);
 		prec=cour;
 		cour=cour->suiv;
 	}
-	printf("mot %s, trad %s\n",prec->mot,prec->trad);
 	free(prec->mot);
 	free(prec->trad);
 	free(prec);
@@ -133,6 +131,20 @@ void LibSousTable(Liste_t SousTable)
 	 
 	 
 	 
+void TailleMoy(Maj_t maj[])
+{
+	int somme = 0, i=0;
+	float moyenne = 0;
+	
+	for(i=0;i<29;i++)
+	{
+		somme+= maj[i].cmpt;
+	}
+	
+	moyenne = somme/29.0;
+	
+	printf("\nPour ce dico, la taille moyenne des sous tables est : %.2f\n", moyenne);
+}			
 	 
 	 
 	 

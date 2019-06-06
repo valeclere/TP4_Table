@@ -1,7 +1,7 @@
 CC= gcc
-CFLAGS=-Wall -Wextra -pedantic
+CFLAGS=-Wall -Wextra -pedantic -ansi
 
-OBJ= main.o hachage.o dictionnaire.o
+OBJ= main.o hachage.o dictionnaire.o tests.o
 
 EXEC=exec
 

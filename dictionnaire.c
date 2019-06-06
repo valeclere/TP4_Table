@@ -21,7 +21,7 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 			ligne[strlen(ligne)-1]='\0';
 			strcpy(mot,strtok(ligne,";"));
 			strcpy(traduction,strtok(NULL,"\0"));
-			printf("[ChargerDico] : mot== -%s- et traduction == -%s-\n", mot, traduction);
+			//~ printf("[ChargerDico] : mot== -%s- et traduction == -%s-\n", mot, traduction); /* à supprimer */
 			Insertion(mot,traduction,Maj);
 		}
 		fclose(fichier);
@@ -108,7 +108,9 @@ void Traduction()
 		}
 		
 		if (choixMenu != 0) /* Si la saisie du menu a fonctionné */
-		{	
+		{
+			TailleMoy(maj);			
+				
 			printf("\nSaisir le texte à traduire : ");
 			fgets(txt,TAILLE_TEXTE,stdin);
 			txt[strlen(txt)-1]='\0';
