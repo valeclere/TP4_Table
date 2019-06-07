@@ -1,7 +1,6 @@
-#include "hachage.h"
 #include "dictionnaire.h"
-
-int main(){
+#include "tests.h"
+int main(void){
 	
 	/*----TEST creation----*/
 	
@@ -21,8 +20,14 @@ int main(){
 	//~ }
 	//~ printf("FIN PROGRAMME\n");
 	
-	Traduction();
+	//Traduction();*/
 	
+	
+	
+	
+	testInsertion();
+	testRechercheMot();
+	testChargerDico();
 	/*-----FIN TEST----*/
 	
 	return 0;

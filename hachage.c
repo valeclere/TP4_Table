@@ -30,26 +30,34 @@ void Insertion(char *mot, char * traduction, Maj_t Maj[])
 	int taille_t = strlen(traduction);
 	Maillon_t * pt_nouv = NULL;
 	
-	pt_nouv = (Maillon_t*)malloc(sizeof(Maillon_t)); /* allocation d'un maillon qui contient le mot, la traduction et un pointeur sur le maillon suivant */
-	pt_nouv->mot = (char*)malloc((taille_m+1)*sizeof(char));
-	pt_nouv->trad = (char*)malloc((taille_t+1)*sizeof(char));
-	
-	strcpy(pt_nouv->mot,mot);
-	strcpy(pt_nouv->trad, traduction);
-	pt_nouv->suiv = NULL;
-	
-	if (pt_nouv==NULL || pt_nouv->mot==NULL || pt_nouv->trad==NULL) /* allocation a échouée */
-	{ 
-		printf("problème d'allocation\n");
-		exit(1); /* on sort du code */
+	if(Maj!=NULL && mot[0]!='\0' && traduction[0]!='\0'){
+		pt_nouv = (Maillon_t*)malloc(sizeof(Maillon_t)); /* allocation d'un maillon qui contient le mot, la traduction et un pointeur sur le maillon suivant */
+		pt_nouv->mot = (char*)malloc((taille_m+1)*sizeof(char));
+		pt_nouv->trad = (char*)malloc((taille_t+1)*sizeof(char));
+		
+		strcpy(pt_nouv->mot,mot);
+		strcpy(pt_nouv->trad, traduction);
+		pt_nouv->suiv = NULL;
+		
+		if (pt_nouv==NULL || pt_nouv->mot==NULL || pt_nouv->trad==NULL) /* allocation a échouée */
+		{ 
+			printf("problème d'allocation\n");
+			exit(1); /* on sort du code */
+		}
+		if (Maj[indice].sousTable!=NULL) /* si la sous table existait déjà on chaine avec le nouveau maillon */
+		{ 
+			pt_nouv->suiv = Maj[indice].sousTable;
+		}
+		Maj[indice].sousTable = pt_nouv; /* on insère le nouveau maillon en début de sous table */
+		Maj[indice].cmpt++; 		      /*incrémentation du compteur de la sous table*/
 	}
-	if (Maj[indice].sousTable!=NULL) /* si la sous table existait déjà on chaine avec le nouveau maillon */
-	{ 
-		pt_nouv->suiv = Maj[indice].sousTable;
+	else{
+		printf("Le tableau majeur n'a pas été initialisé!!!\n");
+		printf("----OU----\n");
+		printf("Le mot ou la traduction est vide\n");
 	}
-	Maj[indice].sousTable = pt_nouv; /* on insère le nouveau maillon en début de sous table */
-	Maj[indice].cmpt++; 		      /*incrémentation du compteur de la sous table*/
 }
+
 
 /*-----------------------------------------------------------------
  * InitTab : fonction qui permet d'initialiser la Table MAJ à NULL
@@ -71,19 +79,24 @@ void InitTab(Maj_t * tab, int taille)
  ----------------*/
 
 bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
-	unsigned int indice = hash_string(mot);
+	unsigned int indice;
 	bool trouve=false;  /*boolean qui permet d'indiquer si oui ou non on a trouvé le mot*/
-	Liste_t tmp = maj[indice].sousTable;
-	
-	while(tmp!=NULL && strcmp(tmp->mot,mot)!=0 ){
-		tmp=tmp->suiv;
+	Liste_t tmp;
+	if(mot[0]!='\0' && maj!=NULL && pt != NULL){
+		indice = hash_string(mot);
+		tmp = maj[indice].sousTable;
+		while(tmp!=NULL && strcmp(tmp->mot,mot)!=0 ){
+			tmp=tmp->suiv;
+		}
+		
+		if(tmp!=NULL){
+			trouve = true;
+			*pt = tmp;
+		}
 	}
-	
-	if(tmp!=NULL){
-		trouve = true;
-		*pt = tmp;
+	else{
+		printf("***Mot vide, table vide ou  pt non déclaré!!!***\n");
 	}
-	//else printf("Mot %s non trouvé :/\n",mot);
 	return trouve;
 }
 
