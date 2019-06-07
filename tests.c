@@ -1,7 +1,6 @@
 #include "tests.h"
 
 
-/*TESTS DE LA FONCTION INSERTION*/
 void testInsertion(){
 	char *mot="bonjour";
 	char *traduction="hello";
@@ -22,16 +21,17 @@ void testInsertion(){
 	LibMaj(maj);
 	printf("----FIN TEST DE LA FONCTION INSERTION----\n\n");
 }
+
 void testRechercheMot(){
 	char *mot="computer";
 	char *fauxMot="cheval";
 	Maj_t maj[29];
-	InitTab(maj,29);
 	Maillon_t * pt_maillon=NULL;
+	InitTab(maj,29);
 	ChargerDico(maj,"Ang_Fra.txt");
 	printf("----DEBUT TEST DE LA FONCTION RECHERCHE MOT----\n");
 	printf("----------------------------\n");
-	printf("On rempli la table avec le fichier Ang_Fra.txt\n");
+	printf("On remplit la table avec le fichier Ang_Fra.txt\n");
 	printf("----------------------------\n");
 	printf("Cas Basic : on recherche un mot qui existe dans la table\n");
 	if(RechercheMot(maj,mot,&pt_maillon)) printf("le mot: %s a été trouvé dans maj.\n",mot);
@@ -42,7 +42,7 @@ void testRechercheMot(){
 	else printf("le mot: %s NON trouvé dans maj.\n",fauxMot);
 	printf("----------------------------\n");
 	printf("Cas 2: on donne a la fonction des paramètre null ou vide\n");
-	RechercheMot("","",NULL);
+	RechercheMot(NULL,"",NULL);
 	LibMaj(maj);
 	printf("----FIN TEST DE LA FONCTION RECHERCHE MOT----\n\n");
 }
@@ -54,7 +54,7 @@ void testChargerDico(){
 	printf("----------------------------\n");
 	printf("Cas Basic : on charge un dico dans un fichier normale\n");
 	ChargerDico(maj,"Ang_Fra.txt");
-	afficheDico(maj);
+	affichageMaj(maj);
 	printf("----------------------------\n");
 	printf("Pour les autre cas on considère que les fichiers sont bien rempli (non vide, sans erreur)\n");
 	printf("----------------------------\n");
@@ -62,25 +62,20 @@ void testChargerDico(){
 	printf("----FIN TEST DE LA FONCTION CHARGER DICO----\n\n");
 }
 
-void afficheDico(Maj_t maj[]){
-	int i=0;
-	int compteur=0;
-	Liste_t cour=NULL;
-	
-	for(i=0;i<29;i++){
-		cour=maj[i].sousTable;
-		while(cour!= NULL){
-			printf("Mot: %s --> Traduction: %s\n",cour->mot,cour->trad);
-			cour=cour->suiv;
-			compteur++;
-		}
-	}
-	printf("Ce dico contient %d traduction(s)\n",compteur);
-}
-
-
-void testTraduction(){
-	printf("----DEBUT TEST DE LA FONCTION TRADCUTION----\n");
+void testTailleMoy(){
+	Maj_t maj[29];
+	InitTab(maj,29);
+	ChargerDico(maj,"Ang_Fra.txt");
+	printf("----DEBUT TEST DE LA FONCTION TAILLE MOY----\n");
 	printf("----------------------------\n");
-	printf("----FIN TEST DE LA FONCTION CHARGER DICO----\n\n");
+	printf("On remplit la table avec le fichier Ang_Fra.txt\n");
+	printf("Cas de base: on veut connaitre la moyenne d'une table majeure qui existe\n");
+	TailleMoy(maj);
+	printf("----------------------------\n");
+	printf("Cas 1: On donne une table vide à la fonction\n");
+	TailleMoy(NULL);
+	printf("----------------------------\n");
+	LibMaj(maj);
+	printf("----FIN TEST DE LA FONCTION TAILLE MOY----\n\n");
+		
 }

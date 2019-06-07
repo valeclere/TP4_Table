@@ -1,6 +1,7 @@
 #include "dictionnaire.h"
 
-void ChargerDico(Maj_t Maj[], const char * nom_fichier){
+void ChargerDico(Maj_t Maj[], const char * nom_fichier)
+{
 	FILE * fichier = NULL;
 	char ligne[TAILLE_LIGNE];
 	char mot[TAILLE_MOT];
@@ -21,39 +22,11 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 			ligne[strlen(ligne)-1]='\0';
 			strcpy(mot,strtok(ligne,";"));
 			strcpy(traduction,strtok(NULL,"\0"));
-			//~ printf("[ChargerDico] : mot== -%s- et traduction == -%s-\n", mot, traduction); /* à supprimer */
 			Insertion(mot,traduction,Maj);
 		}
 		fclose(fichier);
 	}
 }
-
-
-
-
-/*Version Val
-	else
-	{	
-		fgets(ligne,TAILLE_LIGNE,fichier);
-		ligne[strlen(ligne)-1]='\0';
-		strcpy(mot,strtok(ligne,";"));
-		strcpy(traduction,strtok(NULL,"\0"));
-		
-		while(!feof(fichier))
-		{
-			printf("[ChargerDico] : mot== -%s- et traduction == -%s-\n", mot, traduction);
-			Insertion(mot,traduction,Maj);
-			fgets(ligne,TAILLE_LIGNE,fichier);
-			ligne[strlen(ligne)-1]='\0';
-			printf("-------------------%s----------------------",ligne); //
-			strcpy(mot,strtok(ligne,";"));
-			strcpy(traduction,strtok(NULL,"\0")); //problème ---> voir valgrind
-		}
-		fclose(fichier);
-	}
-	* 
-*/
-
 
 
 /*----------------------------------
@@ -64,13 +37,12 @@ void ChargerDico(Maj_t Maj[], const char * nom_fichier){
 void Traduction()
 {
 	Maj_t maj[29];
-	InitTab(maj,29);
 	int choixMenu = 0;
 	char txt[TAILLE_TEXTE];
-	//char txt_trad[];
 	char tmp[TAILLE_MOT];
 	Maillon_t * pt_maillon=NULL;
 	char * cour_txt=NULL;
+	InitTab(maj,29);
 	
 	printf("\nWelcome/Bienvenue/Bienvenida !\n");
 	
@@ -120,7 +92,7 @@ void Traduction()
 			
 			while (*cour_txt!='\0')
 			{
-				//printf("[Traduction] TMP====%s====\n",tmp);
+				
 				if (RechercheMot(maj, tmp,&pt_maillon))
 				{
 					printf(" %s", pt_maillon->trad);
@@ -128,7 +100,7 @@ void Traduction()
 				else printf(" [mot_inconnu]");
 				strcpy(tmp, strtok_r(NULL, " ", &cour_txt));
 			}
-			//printf("[Traduction] TMP====%s====\n",tmp); //à supprimer
+			
 			
 			if (RechercheMot(maj, tmp,&pt_maillon))
 				{
@@ -137,7 +109,7 @@ void Traduction()
 			else printf(" [mot_inconnu]");
 			printf("\n");
 			
-			LibMaj(maj);// libérer la mémoire maj
+			LibMaj(maj);
 			InitTab(maj,29);
 		}
 	}
@@ -145,7 +117,7 @@ void Traduction()
 }
 
 
-//~ const char langueSource, const char langueCible, Maj_t Maj[], char * texte
+
 
 /*------------------------------------------------------------------------
  * Tradution : récupérer le type de traduction choisi par l'utilisateur

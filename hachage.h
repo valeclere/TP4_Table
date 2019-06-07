@@ -28,5 +28,5 @@ bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt);
 void LibMaj(Maj_t Maj[]);
 void LibSousTable(Liste_t SousTable);
 void TailleMoy(Maj_t maj[]);
-
+void affichageMaj(Maj_t maj[]);
 #endif

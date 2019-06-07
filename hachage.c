@@ -148,18 +148,35 @@ void TailleMoy(Maj_t maj[])
 {
 	int somme = 0, i=0;
 	float moyenne = 0;
-	
+	if(maj!=NULL){
 	for(i=0;i<29;i++)
 	{
 		somme+= maj[i].cmpt;
 	}
-	
 	moyenne = somme/29.0;
-	
 	printf("\nPour ce dico, la taille moyenne des sous tables est : %.2f\n", moyenne);
+	}
+	else
+	{
+		printf("La table est vide donc impossible de calculer la moyenne :/\n");
+	}
 }			
 	 
-	 
+void affichageMaj(Maj_t maj[])
+{
+	int i=0;
+	int compteur=0;
+	Liste_t cour=NULL;
+	for(i=0;i<29;i++){
+		cour=maj[i].sousTable;
+		while(cour!= NULL){
+			printf("Mot: %s --> Traduction: %s\n",cour->mot,cour->trad);
+			cour=cour->suiv;
+			compteur++;
+		}
+	}
+	printf("Ce dico contient %d traduction(s)\n",compteur);
+}	 
 	 
 	 
 
