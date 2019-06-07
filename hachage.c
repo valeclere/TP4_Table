@@ -75,7 +75,7 @@ void InitTab(Maj_t * tab, int taille)
 }
 
 /*-----------------
- * RechercheMot
+ * RechercheMot : 
  ----------------*/
 
 bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
@@ -101,18 +101,19 @@ bool RechercheMot(Maj_t maj[], char * mot, Maillon_t ** pt){
 }
 
 
-/*-------------
- * Libérer Maj
- *-------*/
+/*-----------------------------------------------
+ * Libérer Maj : libération de la table majeure
+ * Entrée : Maj = table majeure
+ *-----------------------------------------------*/
  
 void LibMaj(Maj_t Maj[])
 {
 	int i=0;
 	for (i=0;i<29;i++)
 	{
-		if (Maj[i].sousTable!=NULL)
+		if (Maj[i].sousTable!=NULL) /* s'il il y a une sous table */
 		{
-			LibSousTable(Maj[i].sousTable);
+			LibSousTable(Maj[i].sousTable); /* on libère une sous table */
 		}
 	} 
 	  
@@ -130,7 +131,7 @@ void LibSousTable(Liste_t SousTable)
 	
 	while(cour!=NULL)
 	{
-		free(prec->mot);
+		free(prec->mot); /* */
 		free(prec->trad);
 		free(prec);
 		prec=cour;

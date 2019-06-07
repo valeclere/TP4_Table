@@ -73,13 +73,14 @@ void Traduction()
 				break;
 			case 7:
 				printf("\nSee you/À bientôt/Hasta pronto !\n");
-				exit(0);
+				break;
 			default:
 				printf("Erreur de saisie, saisir un nombre entre 1 et 7\n");
 				SaisirChoix(&choixMenu);
+				break;
 		}
 		
-		if (choixMenu != 0) /* Si la saisie du menu a fonctionné */
+		if (choixMenu != 7) /* Si l'utilisateur n'a pas quitté */
 		{
 			TailleMoy(maj);			
 				
