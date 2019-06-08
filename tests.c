@@ -1,5 +1,13 @@
 #include "tests.h"
 
+/*----------------------------------------------------------------------------------------------------
+ * test : module contenant les tests de toutes les fonctions du TP
+ * 
+ * La fonction Traduction() n'est pas testé car elle contient une saisie de l'utilisateur.
+ * Cependant elle ne fait que réutiliser les autres fonctions du TP qui ont été testé.
+ * De plus Traduction a le format d'un menu et peut donc être testé en lançant l'executable.
+ ------------------------------------------------------------------------------------------------------*/
+
 
 void testInsertion(){
 	char *mot="bonjour";

@@ -1,1 +1,9 @@
 hello;hola
+my;mi
+line;linea
+i;yo
+am;soy
+a;un
+why;porque
+this;este
+cat;gato

@@ -14,3 +14,4 @@ $(EXEC) : $(OBJ)
 
 clean :
 	rm -rf dep *.o vgcore.*
+

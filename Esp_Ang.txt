@@ -1,1 +1,5 @@
 hola;hello
+para;for
+yo;I
+comer;eat
+beber;drink

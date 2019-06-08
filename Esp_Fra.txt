@@ -1,1 +1,5 @@
 hola;bonjour
+para;pour
+yo;je
+comer;manger
+beber;boire

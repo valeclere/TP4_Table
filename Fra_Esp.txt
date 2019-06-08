@@ -1,1 +1,7 @@
 bière;cerveza
+pinte;pinta
+bonjour;hola
+pour;para
+je;yo
+manger;comer
+boire;beber

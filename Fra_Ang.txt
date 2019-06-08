@@ -1,1 +1,9 @@
 salut;hi
+bonjour;hello
+je;I
+ensuite;then
+mon;my
+suis;am
+un;a
+le;the
+fin;end
