@@ -30,6 +30,7 @@ int main(void)
 		switch (choix)
 		{
 			case 1: /* tests de toutes les fonctions */
+				printf("\n");
 				testInsertion();
 				printf("\n");
 				testRechercheMot();

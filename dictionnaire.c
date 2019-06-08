@@ -94,36 +94,45 @@ void Traduction()
 				break;
 		}
 		
-		if (choixMenu != 7) /* Si l'utilisateur n'a pas quitté */
+		if (choixMenu>=1 && choixMenu<=6) /* Si l'utilisateur a saisi un type de traduction */
 		{
 			TailleMoy(maj);	/* on affiche la taille moyenne des sous tables (question bonus)*/		
 				
 			printf("\nSaisir le texte à traduire : ");
 			fgets(txt,TAILLE_TEXTE,stdin); /* on récupère le texte à traduire */
 			txt[strlen(txt)-1]='\0'; /* on le transforme en chaine de caractère */
-			strcpy(tmp, strtok_r(txt, " ", &cour_txt)); /* on sépare les mots grâce aux espaces en utilisant strtok_r */ /* strtok_r permet de récupérer un pointeur sur la suite de la chaine de caractère */
-		
-			printf("Traduction : ");
 			
-			while (*cour_txt!='\0') /* tant qu'on est pas à la fin du texte à traduire */
-			{
+			if (*txt!='\0') /* si l'utilisateur ne saisie pas un mot vide */
+			{	
+				strcpy(tmp, strtok_r(txt, " ", &cour_txt)); /* on sépare les mots grâce aux espaces en utilisant strtok_r */ /* strtok_r permet de récupérer un pointeur sur la suite de la chaine de caractère */
+			
+				printf("Traduction : ");
 				
-				if (RechercheMot(maj, tmp,&pt_maillon)) /* si le mot à traduire existe dans la table */ 
+				while (*cour_txt!='\0') /* tant qu'on est pas à la fin du texte à traduire */
 				{
-					printf(" %s", pt_maillon->trad); /* on affiche la traduction */
+					
+					if (RechercheMot(maj, tmp,&pt_maillon)) /* si le mot à traduire existe dans la table */ 
+					{
+						printf(" %s", pt_maillon->trad); /* on affiche la traduction */
+					}
+					else printf(" [mot_inconnu]"); /* sinon on affiche "mot inconnu" */
+					
+					strcpy(tmp, strtok_r(NULL, " ", &cour_txt)); /* puis on récupère le mot suivant à traduire */
 				}
-				else printf(" [mot_inconnu]"); /* sinon on affiche "mot inconnu" */
 				
-				strcpy(tmp, strtok_r(NULL, " ", &cour_txt)); /* puis on récupère le mot suivant à traduire */
+				
+				if (RechercheMot(maj, tmp,&pt_maillon)) /* pour le dernier mot */
+					{
+						printf(" %s", pt_maillon->trad);
+					}
+				else printf(" [mot_inconnu]");
+				printf("\n");
 			}
 			
-			
-			if (RechercheMot(maj, tmp,&pt_maillon)) /* pour le dernier mot */
-				{
-					printf(" %s", pt_maillon->trad);
-				}
-			else printf(" [mot_inconnu]");
-			printf("\n");
+			else 
+			{
+				printf("Vous n'avez rien saisi\n");
+			}
 			
 			LibMaj(maj); /* on libère la table majeure et les sous tables */
 			InitTab(maj,29); /* on réinitialise la table majeure */

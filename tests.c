@@ -16,14 +16,14 @@ void testInsertion(){
 	InitTab(maj,29);
 	printf("----DEBUT TEST DE LA FONCTION INSERTION----\n");
 	printf("----------------------------\n");
-	printf("Cas Basic : on donne les bons paramètre à la fonction\n");
+	printf("Cas Basique : on donne les bons paramètres à la fonction\n");
 	Insertion(mot,traduction,maj);
-	printf("le programme continue à s'exécuter sans problème\nles allocations ont bien fonctionnés\n");
+	printf("le programme continue à s'exécuter sans problème\nles allocations ont bien fonctionnées\n");
 	printf("----------------------------\n");
 	printf("Cas 1 : on donne à la fonction que des arguments vide ou nul\n");
 	Insertion("","",NULL);
 	printf("----------------------------\n");
-	printf("Cas 2 : on donne à la fonction des mot vide et maj initialisé\n");
+	printf("Cas 2 : on donne à la fonction des mots vides et maj initialisé\n");
 	Insertion("","",maj);
 	printf("----------------------------\n");
 	LibMaj(maj);
@@ -41,7 +41,7 @@ void testRechercheMot(){
 	printf("----------------------------\n");
 	printf("On remplit la table avec le fichier Ang_Fra.txt\n");
 	printf("----------------------------\n");
-	printf("Cas Basic : on recherche un mot qui existe dans la table\n");
+	printf("Cas Basique : on recherche un mot qui existe dans la table\n");
 	if(RechercheMot(maj,mot,&pt_maillon)) printf("le mot: %s a été trouvé dans maj.\n",mot);
 	else printf("le mot: %s NON trouvé dans maj.\n",mot);
 	printf("----------------------------\n");
@@ -49,7 +49,7 @@ void testRechercheMot(){
 	if(RechercheMot(maj,fauxMot,&pt_maillon)) printf("le mot: %s a été trouvé dans maj.\n",fauxMot);
 	else printf("le mot: %s NON trouvé dans maj.\n",fauxMot);
 	printf("----------------------------\n");
-	printf("Cas 2: on donne a la fonction des paramètre null ou vide\n");
+	printf("Cas 2: on donne a la fonction des paramètres null ou vide\n");
 	RechercheMot(NULL,"",NULL);
 	LibMaj(maj);
 	printf("----FIN TEST DE LA FONCTION RECHERCHE MOT----\n\n");
@@ -60,11 +60,11 @@ void testChargerDico(){
 	InitTab(maj,29);
 	printf("----DEBUT TEST DE LA FONCTION CHARGER DICO----\n");
 	printf("----------------------------\n");
-	printf("Cas Basic : on charge un dico dans un fichier normale\n");
+	printf("Cas Basic : on charge un dico dans un fichier normal\n");
 	ChargerDico(maj,"Ang_Fra.txt");
 	affichageMaj(maj);
 	printf("----------------------------\n");
-	printf("Pour les autre cas on considère que les fichiers sont bien rempli (non vide, sans erreur)\n");
+	printf("Pour les autres cas on considère que les fichiers sont bien remplis (non vide, sans erreur)\n");
 	printf("----------------------------\n");
 	LibMaj(maj);
 	printf("----FIN TEST DE LA FONCTION CHARGER DICO----\n\n");
@@ -77,7 +77,7 @@ void testTailleMoy(){
 	printf("----DEBUT TEST DE LA FONCTION TAILLE MOY----\n");
 	printf("----------------------------\n");
 	printf("On remplit la table avec le fichier Ang_Fra.txt\n");
-	printf("Cas de base: on veut connaitre la moyenne d'une table majeure qui existe\n");
+	printf("Cas de base: on veut connaitre la taille moyenne des sous tables lorsque Maj existe\n");
 	TailleMoy(maj);
 	printf("----------------------------\n");
 	printf("Cas 1: On donne une table vide à la fonction\n");
